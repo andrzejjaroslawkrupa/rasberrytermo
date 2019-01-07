@@ -3,11 +3,14 @@ import pygame
 import os
 import math
 import time
-
+import busio
+import board
 import numpy as np
 from scipy.interpolate import griddata
 
 from colour import Color
+
+i2c_bus = busio.I2C(board.SCL, board.SDA)
 
 #low range of the sensor (this will be blue on the screen)
 MINTEMP = 26
@@ -22,7 +25,7 @@ os.putenv('SDL_FBDEV', '/dev/fb1')
 pygame.init()
 
 #initialize the sensor
-sensor = Adafruit_AMG88xx()
+sensor = adafruit_amg88xx.AMG88XX(i2c_bus)
 
 points = [(math.floor(ix / 8), (ix % 8)) for ix in range(0, 64)]
 grid_x, grid_y = np.mgrid[0:7:32j, 0:7:32j]
@@ -121,7 +124,9 @@ while(1):
                 mousebuttondown()
 
     #read the pixels
-    pixels = sensor.readPixels()
+    pixels = []
+    for row in sensor.pixels:
+        pixels = pixels + row
     pixels = [map(p, MINTEMP, MAXTEMP, 0, COLORDEPTH - 1) for p in pixels]
 
     #perdorm interpolation
