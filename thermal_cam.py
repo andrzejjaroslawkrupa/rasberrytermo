@@ -1,4 +1,4 @@
-from Adafruit_AMG88xx import Adafruit_AMG88xx
+import adafruit_amg88xx
 import pygame
 import os
 import math
@@ -55,8 +55,6 @@ pygame.mouse.set_visible(True)
 lcd.fill((0,0,0))
 pygame.display.update()
 
-
-
 def exit_window():
     pygame.quit()
 
@@ -65,47 +63,46 @@ def constrain(val, min_val, max_val):
     return min(max_val, max(min_val, val))
 
 def map(x, in_min, in_max, out_min, out_max):
-  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
+    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
 
 def mousebuttondown():
     pos = pygame.mouse.get_pos()
     if exit_button.rect.collidepoint(pos):
         exit_button.call_back()
-    
+
 class Button():
     def __init__(self, txt, location, action, bg=WHITE, fg = BLACK, size = (50,20), font_name="Segoe Print", font_size = 10):
         self.color = bg
         self.bg = bg
         self.fg =fg
         self.size = size
-        
+
         self.font = pygame.font.SysFont(font_name, font_size)
 
         self.txt = txt
 
         self.txt_surf = self.font.render(self.txt, 1, self.fg)
         self.txt_rect = self.txt_surf.get_rect(center=[s//2 for s in self.size])
-        
+
         self.surface = pygame.surface.Surface(size)
 
         self.rect = self.surface.get_rect(center=location)
 
         self.call_back_ = action
-    
+
     def mouseover(self):
         self.bg = self.color
         pos = pygame.mouse.get_pos()
         if self.rect.collidepoint(pos):
             self.bg = GREY  # mouseover color
 
-    
+
     def draw(self):
         self.mouseover()
- 
         self.surface.fill(self.bg)
         self.surface.blit(self.txt_surf, self.txt_rect)
         lcd.blit(self.surface, self.rect)
-        
+
     def call_back(self):
         self.call_back_()
 
@@ -113,29 +110,26 @@ class Button():
 exit_button = Button("Exit", (290, 20), exit_window)
 #let the sensor initialize
 time.sleep(.1)
-	
+
 while(1):
-        
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
 
-                pygame.quit()
-                sys.exit()
-
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-
+        elif event.type == pygame.MOUSEBUTTONDOWN:
                 mousebuttondown()
 
-	#read the pixels
-	pixels = sensor.readPixels()
-	pixels = [map(p, MINTEMP, MAXTEMP, 0, COLORDEPTH - 1) for p in pixels]
-	
-	#perdorm interpolation
-	bicubic = griddata(points, pixels, (grid_x, grid_y), method='cubic')
-	
-	#draw everything
-	for ix, row in enumerate(bicubic):
-		for jx, pixel in enumerate(row):
-			pygame.draw.rect(lcd, colors[constrain(int(pixel), 0, COLORDEPTH- 1)], (displayPixelHeight * ix, displayPixelWidth * jx, displayPixelHeight, displayPixelWidth))
-	exit_button.draw()
-	pygame.display.update()
+    #read the pixels
+    pixels = sensor.readPixels()
+    pixels = [map(p, MINTEMP, MAXTEMP, 0, COLORDEPTH - 1) for p in pixels]
+
+    #perdorm interpolation
+    bicubic = griddata(points, pixels, (grid_x, grid_y), method='cubic')
+
+    #draw everything
+    for ix, row in enumerate(bicubic):
+        for jx, pixel in enumerate(row):
+            pygame.draw.rect(lcd, colors[constrain(int(pixel), 0, COLORDEPTH- 1)], (displayPixelHeight * ix, displayPixelWidth * jx, displayPixelHeight, displayPixelWidth))
+    exit_button.draw()
+    pygame.display.update()
