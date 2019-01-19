@@ -44,6 +44,7 @@ RED = (255, 0, 0)
 WHITE = (255, 255, 255)
 GREY = (200, 200, 200)
 BLACK = (0, 0, 0)
+isInterpolationOn = True
 
 displayPixelWidth = width / 30
 displayPixelHeight = height / 30
@@ -61,6 +62,9 @@ pygame.display.update()
 def exit_window():
     pygame.quit()
 
+def switch_interpolation():
+    not isInterpolationOn
+
 #some utility functions
 def constrain(val, min_val, max_val):
     return min(max_val, max(min_val, val))
@@ -72,6 +76,9 @@ def mousebuttondown():
     pos = pygame.mouse.get_pos()
     if exit_button.rect.collidepoint(pos):
         exit_button.call_back()
+    if interpolation_button.rect.collidepoint(pos):
+        interpolation_button.call_back()
+
 
 class Button():
     def __init__(self, txt, location, action, bg=WHITE, fg = BLACK, size = (50,20), font_name="Segoe Print", font_size = 10):
@@ -110,7 +117,10 @@ class Button():
         self.call_back_()
 
 
-exit_button = Button("Exit", (290, 20), exit_window)
+interpolation_button = Button("Interpolation", (290, 20), switch_interpolation)
+
+exit_button = Button("Exit", (290, 60), exit_window)
+
 #let the sensor initialize
 time.sleep(.1)
 
@@ -130,7 +140,10 @@ while(1):
     pixels = [map(p, MINTEMP, MAXTEMP, 0, COLORDEPTH - 1) for p in pixels]
 
     #perform interpolation
-    bicubic = griddata(points, pixels, (grid_x, grid_y), method='cubic')
+    if isInterpolationOn == True:
+        bicubic = griddata(points, pixels, (grid_x, grid_y), method='cubic')
+    else:
+        bicubic = pixels
 
     #draw everything
     for ix, row in enumerate(bicubic):
