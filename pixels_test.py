@@ -49,6 +49,10 @@ sensor = adafruit_amg88xx.AMG88XX(i2c_bus)
 sleep(.1)
 
 while(1):
-	print(sensor.readPixels())
+	pixels = []
+    for row in sensor.pixels:
+        pixels = pixels + row
+    pixels = [map(p, MINTEMP, MAXTEMP, 0, COLORDEPTH - 1) for p in pixels]
+
 	sleep(1)
 	
