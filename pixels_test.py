@@ -28,6 +28,8 @@ import adafruit_amg88xx
 from time import sleep
 import busio
 import board
+import numpy as np
+from scipy.interpolate import griddata
 
 #import Adafruit_AMG88xx.Adafruit_AMG88xx as AMG88
 
@@ -47,13 +49,18 @@ sensor = adafruit_amg88xx.AMG88XX(i2c_bus)
 
 #wait for it to boot
 sleep(.1)
+points = [(math.floor(ix / 8), (ix % 8)) for ix in range(0, 64)]
+grid_x, grid_y = np.mgrid[0:7, 0:7]
 
 while(1):
     pixels = []
     for row in sensor.pixels:
         pixels = pixels + row
-    for p in pixels:
-        print(p)
+
+    bicubic = griddata(points, pixels, (grid_x, grid_y), method='cubic')
+    for b in bicubic:
+        print(b)
+    print('stop')
 
     sleep(1)
 	
