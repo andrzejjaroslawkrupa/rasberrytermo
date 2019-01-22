@@ -24,8 +24,10 @@
 #import logging
 #logging.basicConfig(level=logging.DEBUG)
 
-from Adafruit_AMG88xx import Adafruit_AMG88xx
+import adafruit_amg88xx
 from time import sleep
+import busio
+import board
 
 #import Adafruit_AMG88xx.Adafruit_AMG88xx as AMG88
 
@@ -37,8 +39,9 @@ from time import sleep
 #
 # For the Beaglebone Black the library will assume bus 1 by default, which is
 # exposed with SCL = P9_19 and SDA = P9_20.
-sensor = Adafruit_AMG88xx()
-
+#sensor = Adafruit_AMG88xx()
+i2c_bus = busio.I2C(board.SCL, board.SDA)
+sensor = adafruit_amg88xx.AMG88XX(i2c_bus)
 # Optionally you can override the bus number:
 #sensor = AMG88.Adafruit_AMG88xx(busnum=2)
 
