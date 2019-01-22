@@ -29,6 +29,7 @@ sensor = adafruit_amg88xx.AMG88XX(i2c_bus)
 
 points = [(math.floor(ix / 8), (ix % 8)) for ix in range(0, 64)]
 grid_x, grid_y = np.mgrid[0:7:32j, 0:7:32j]
+grid_x_no_interpolation, grid_y_no_interpolation = np.mgrid[0:7, 0:7]
 
 #sensor is an 8x8 grid so lets do a square
 height = 240
@@ -44,7 +45,7 @@ RED = (255, 0, 0)
 WHITE = (255, 255, 255)
 GREY = (200, 200, 200)
 BLACK = (0, 0, 0)
-isInterpolationOn = True
+isInterpolationOn = False
 
 displayPixelWidth = width / 30
 displayPixelHeight = height / 30
@@ -143,7 +144,7 @@ while(1):
     if isInterpolationOn == True:
         bicubic = griddata(points, pixels, (grid_x, grid_y), method='cubic')
     else:
-        bicubic = pixels
+        bicubic = griddata(points, pixels, (grid_x_no_interpolation, grid_y_no_interpolation), method='cubic')
 
     #draw everything
     for ix, row in enumerate(bicubic):
