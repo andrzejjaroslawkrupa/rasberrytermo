@@ -150,5 +150,5 @@ while(1):
         for jx, pixel in enumerate(row):
             pygame.draw.rect(lcd, colors[constrain(int(pixel), 0, COLORDEPTH- 1)], (displayPixelHeight * ix, displayPixelWidth * jx, displayPixelHeight, displayPixelWidth))
     interpolation_button.draw()
-	exit_button.draw()
+    exit_button.draw()
     pygame.display.update()
