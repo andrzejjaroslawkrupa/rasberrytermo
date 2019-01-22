@@ -52,7 +52,8 @@ while(1):
     pixels = []
     for row in sensor.pixels:
         pixels = pixels + row
-    pixels = [map(p, MINTEMP, MAXTEMP, 0, COLORDEPTH - 1) for p in pixels]
+    for p in pixels
+        print(p)
 
     sleep(1)
 	
