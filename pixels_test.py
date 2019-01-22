@@ -25,11 +25,16 @@
 #logging.basicConfig(level=logging.DEBUG)
 
 import adafruit_amg88xx
-from time import sleep
+import pygame
+import os
+import math
+import time
 import busio
 import board
 import numpy as np
 from scipy.interpolate import griddata
+
+from colour import Color
 
 #import Adafruit_AMG88xx.Adafruit_AMG88xx as AMG88
 
