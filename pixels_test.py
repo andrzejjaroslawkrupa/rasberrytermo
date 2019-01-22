@@ -53,7 +53,7 @@ sensor = adafruit_amg88xx.AMG88XX(i2c_bus)
 #sensor = AMG88.Adafruit_AMG88xx(busnum=2)
 
 #wait for it to boot
-sleep(.1)
+time.sleep(.1)
 points = [(math.floor(ix / 8), (ix % 8)) for ix in range(0, 64)]
 grid_x, grid_y = np.mgrid[0:7, 0:7]
 
@@ -67,5 +67,5 @@ while(1):
         print(b)
     print('stop')
 
-    sleep(1)
+    time.sleep(1)
 	
