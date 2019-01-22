@@ -144,7 +144,7 @@ while(1):
     if isInterpolationOn == True:
         bicubic = griddata(points, pixels, (grid_x, grid_y), method='cubic')
     else:
-        bicubic = griddata(points, pixels, (grid_x_no_interpolation, grid_y_no_interpolation), method='cubic')
+        bicubic = griddata(points, pixels, (grid_x, grid_y))
 
     #draw everything
     for ix, row in enumerate(bicubic):
