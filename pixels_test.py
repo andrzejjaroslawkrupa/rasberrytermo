@@ -52,7 +52,7 @@ while(1):
     pixels = []
     for row in sensor.pixels:
         pixels = pixels + row
-    for p in pixels
+    for p in pixels:
         print(p)
 
     sleep(1)
