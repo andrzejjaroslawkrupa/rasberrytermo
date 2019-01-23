@@ -47,8 +47,8 @@ GREY = (200, 200, 200)
 BLACK = (0, 0, 0)
 isInterpolationOn = False
 
-displayPixelWidth = width / 30
-displayPixelHeight = height / 30
+displayPixelWidth = width / 8
+displayPixelHeight = height / 8
 
 lcd = pygame.display.set_mode((320, height), pygame.FULLSCREEN)
 
@@ -149,7 +149,7 @@ while(1):
     #draw everything
     for ix, row in enumerate(bicubic):
         for jx, pixel in enumerate(row):
-            pygame.draw.rect(lcd, colors[constrain(int(pixel), 0, COLORDEPTH- 1)], (displayPixelHeight * ix, displayPixelWidth * jx, displayPixelHeight * 30, displayPixelWidth * 30))
+            pygame.draw.rect(lcd, colors[constrain(int(pixel), 0, COLORDEPTH- 1)], (displayPixelHeight * ix, displayPixelWidth * jx, displayPixelHeight, displayPixelWidth))
     interpolation_button.draw()
     exit_button.draw()
     pygame.display.update()
