@@ -45,10 +45,10 @@ RED = (255, 0, 0)
 WHITE = (255, 255, 255)
 GREY = (200, 200, 200)
 BLACK = (0, 0, 0)
-isInterpolationOn = False
+isInterpolationOn = True
 
-displayPixelWidth = width / 8
-displayPixelHeight = height / 8
+displayPixelWidth = width / 30
+displayPixelHeight = height / 30
 
 lcd = pygame.display.set_mode((320, height), pygame.FULLSCREEN)
 
@@ -145,6 +145,8 @@ while(1):
         bicubic = griddata(points, pixels, (grid_x, grid_y), method='cubic')
     else:
         bicubic = griddata(points, pixels, (grid_x_no_interpolation, grid_y_no_interpolation))
+        displayPixelWidth = width / 8
+        displayPixelHeight = height / 8
 
     #draw everything
     for ix, row in enumerate(bicubic):
