@@ -132,7 +132,7 @@ screenshot_button = Button("Screenshot", (290, 100), screenshot)
 #let the sensor initialize
 time.sleep(.1)
 
-def screenshot():
+def switch_interpolation():
     while(1):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
