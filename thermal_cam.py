@@ -66,6 +66,9 @@ def exit_window():
 def switch_interpolation():
     not isInterpolationOn
 
+def screenshot():
+    pygame.image.save(lcd, 'pic.png')	
+
 #some utility functions
 def constrain(val, min_val, max_val):
     return min(max_val, max(min_val, val))
@@ -122,6 +125,8 @@ interpolation_button = Button("Interpolation", (290, 20), switch_interpolation)
 
 exit_button = Button("Exit", (290, 60), exit_window)
 
+screenshot_button = Button("Screenshot", (290, 100), screenshot)
+
 #let the sensor initialize
 time.sleep(.1)
 
@@ -154,4 +159,5 @@ while(1):
             pygame.draw.rect(lcd, colors[constrain(int(pixel), 0, COLORDEPTH- 1)], (displayPixelHeight * ix, displayPixelWidth * jx, displayPixelHeight, displayPixelWidth))
     interpolation_button.draw()
     exit_button.draw()
+    screenshot_button.draw()
     pygame.display.update()
