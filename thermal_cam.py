@@ -81,7 +81,7 @@ def mousebuttondown():
     if exit_button.rect.collidepoint(pos):
         exit_button.call_back()
     if screenshot_button.rect.collidepoint(pos):
-        screenshot.call_back()
+        screenshot_button.call_back()
     if interpolation_button.rect.collidepoint(pos):
         interpolation_button.call_back()
 
