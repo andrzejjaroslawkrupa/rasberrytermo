@@ -123,7 +123,7 @@ class Button():
         self.call_back_()
 
 
-interpolation_button = Button("Interpolation", (290, 20), switch_interpolation)
+
 
 exit_button = Button("Exit", (290, 60), exit_window)
 
@@ -162,7 +162,7 @@ def switch_interpolation():
         exit_button.draw()
         screenshot_button.draw()
         pygame.display.update()
-    
+interpolation_button = Button("Interpolation", (290, 20), switch_interpolation)
 
 while(1):
     for event in pygame.event.get():
