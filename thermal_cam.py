@@ -135,7 +135,7 @@ time.sleep(.1)
 def switch_interpolation():
     lcd.fill((0,0,0))
     pygame.display.update()
-    global isInterpolationOn = not isInterpolationOn
+    global isInterpolationOn = not global isInterpolationOn
 
 interpolation_button = Button("Interpolation", (290, 20), switch_interpolation)
 
