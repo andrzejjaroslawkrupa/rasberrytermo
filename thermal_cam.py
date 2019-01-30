@@ -133,8 +133,7 @@ screenshot_button = Button("Screenshot", (290, 100), screenshot)
 time.sleep(.1)
 
 def switch_interpolation():
-lcd.fill((0,0,0))
-pygame.display.update()
+    pygame.display.update()
     while(1):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
