@@ -56,7 +56,7 @@ lcd = pygame.display.set_mode((320, height), pygame.FULLSCREEN)
 lcd.fill((255,0,0))
 
 pygame.display.update()
-pygame.mouse.set_visible(False)
+pygame.mouse.set_visible(True)
 
 lcd.fill((0,0,0))
 pygame.display.update()
