@@ -127,8 +127,8 @@ class Button():
 
 
 interpolation_button = Button("Interpolation", (290, 20), switch_interpolation)
-exit_button = Button("Exit", (290, 60), exit_window)
-screenshot_button = Button("Screenshot", (290, 100), screenshot)
+screenshot_button = Button("Screenshot", (290, 60), screenshot)
+exit_button = Button("Exit", (290, 100), exit_window)
 
 #let the sensor initialize
 time.sleep(.1)
@@ -151,6 +151,8 @@ while(1):
     #perform interpolation
     if isInterpolationOn == True:
         bicubic = griddata(points, pixels, (grid_x, grid_y), method='cubic')
+        displayPixelWidth = width / 30
+        displayPixelHeight = height / 30
     else:
         bicubic = griddata(points, pixels, (grid_x_no_interpolation, grid_y_no_interpolation))
         displayPixelWidth = width / 8
