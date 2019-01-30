@@ -7,6 +7,7 @@ import busio
 import board
 import numpy as np
 from scipy.interpolate import griddata
+from subprocess import call
 
 from colour import Color
 
@@ -61,7 +62,7 @@ lcd.fill((0,0,0))
 pygame.display.update()
 
 def exit_window():
-    pygame.quit()
+    call("sudo shutdown -h now", shell=True)
 
 def switch_interpolation():
     lcd.fill((0,0,0))
