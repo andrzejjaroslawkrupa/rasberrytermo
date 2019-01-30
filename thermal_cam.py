@@ -63,8 +63,11 @@ pygame.display.update()
 def exit_window():
     pygame.quit()
 
-#def switch_interpolation():
- #   isInterpolationOn = False
+def switch_interpolation():
+    lcd.fill((0,0,0))
+    pygame.display.update()
+    global isInterpolationOn
+    isInterpolationOn = not isInterpolationOn
 
 def screenshot():
     pygame.image.save(lcd, 'pic.png')	
@@ -123,22 +126,12 @@ class Button():
         self.call_back_()
 
 
-
-
+interpolation_button = Button("Interpolation", (290, 20), switch_interpolation)
 exit_button = Button("Exit", (290, 60), exit_window)
-
 screenshot_button = Button("Screenshot", (290, 100), screenshot)
 
 #let the sensor initialize
 time.sleep(.1)
-
-def switch_interpolation():
-    lcd.fill((0,0,0))
-    pygame.display.update()
-    global isInterpolationOn
-    isInterpolationOn = not isInterpolationOn
-
-interpolation_button = Button("Interpolation", (290, 20), switch_interpolation)
 
 while(1):
     for event in pygame.event.get():
