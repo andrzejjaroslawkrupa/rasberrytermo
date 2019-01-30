@@ -135,35 +135,8 @@ time.sleep(.1)
 def switch_interpolation():
     lcd.fill((0,0,0))
     pygame.display.update()
-    while(1):
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
+    isInterpolationOn = not isInterpolationOn
 
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                    mousebuttondown()
-
-        #read the pixels
-        pixels = []
-        for row in sensor.pixels:
-            pixels = pixels + row
-        pixels = [map(p, MINTEMP, MAXTEMP, 0, COLORDEPTH - 1) for p in pixels]
-
-        #perform interpolation
-        
-        bicubic = griddata(points, pixels, (grid_x_no_interpolation, grid_y_no_interpolation))
-        displayPixelWidth = width / 8
-        displayPixelHeight = height / 8
-
-        #draw everything
-        for ix, row in enumerate(bicubic):
-            for jx, pixel in enumerate(row):
-                pygame.draw.rect(lcd, colors[constrain(int(pixel), 0, COLORDEPTH- 1)], (displayPixelHeight * ix, displayPixelWidth * jx, displayPixelHeight, displayPixelWidth))
-        interpolation_button.draw()
-        exit_button.draw()
-        screenshot_button.draw()
-        pygame.display.update()
 interpolation_button = Button("Interpolation", (290, 20), switch_interpolation)
 
 while(1):
