@@ -64,7 +64,7 @@ def exit_window():
     pygame.quit()
 
 def switch_interpolation():
-    not isInterpolationOn
+    isInterpolationOn = False
 
 def screenshot():
     pygame.image.save(lcd, 'pic.png')	
