@@ -71,7 +71,7 @@ def switch_interpolation():
     isInterpolationOn = not isInterpolationOn
 
 def screenshot():
-    pygame.image.save(lcd, 'pic.png')	
+    pygame.image.save(lcd, now.isoformat() + 'pic.png')	
 
 #some utility functions
 def constrain(val, min_val, max_val):
