@@ -71,7 +71,7 @@ def switch_interpolation():
     isInterpolationOn = not isInterpolationOn
 
 def screenshot():
-    now = datetima().now()
+    now = datetime().now()
     pygame.image.save(lcd, now.isoformat() + 'pic.png')	
 
 #some utility functions
