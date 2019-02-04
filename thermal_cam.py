@@ -8,6 +8,7 @@ import board
 import numpy as np
 from scipy.interpolate import griddata
 from subprocess import call
+from datetime import datetime
 
 from colour import Color
 
@@ -71,7 +72,7 @@ def switch_interpolation():
     isInterpolationOn = not isInterpolationOn
 
 def screenshot():
-    now = datetime().now()
+    now = datetime.now()
     pygame.image.save(lcd, now.isoformat() + 'pic.png')	
 
 #some utility functions
